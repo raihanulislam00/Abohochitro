@@ -1,13 +1,12 @@
 <?php
-// Updated database configuration
-$host = 'db.fr-pari1.bengt.wasmernet.com';
-$port = 10272;
-$dbname = 'dbSeNWLWvjfKnNgrsdtnqZF2';
-$username = 'e3e76b65752d8000ddf0d635ed87';
-$password = '0685e3e7-6b66-729b-8000-6f38cddbbad2';
+// Database configuration
+$host = 'localhost';
+$dbname = 'users';
+$username = 'root';
+$password = '';
 
-// Create connection with port specification
-$conn = new mysqli($host, $username, $password, $dbname, $port);
+// Create connection
+$conn = new mysqli($host, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
