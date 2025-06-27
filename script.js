@@ -14,7 +14,6 @@ function validateForm() {
     const namePattern = /^[A-Za-z\s\.]+$/;
     const zipPattern = /^\d{4}$/;
     const mailpattern = /^\d{2}-\d{5}-[1-3]@student\.aiub\.edu$/;
-    const passPattern = /^\d{8}$/;
 
     // Validation for each field with improved error messages
     if (!namePattern.test(fname)) {
@@ -29,8 +28,9 @@ function validateForm() {
         return false;
     }
     
-    if (password === "" || !passPattern.test(password)) {
-        showError("Password must be exactly 8 digits (0-9).");
+    //Password validation (8 or more characters: letters, digits, and special characters allowed)
+    if (password.length < 8) {
+        showError("Password must be at least 8 characters long (letters, digits, and special characters allowed).");
         highlightField("password");
         return false;
     }
@@ -165,21 +165,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-// Toggle profile dropdown
-function toggleProfile() {
-    document.getElementById('profileDropdown').classList.toggle('show');
-}
-
-// Close the dropdown if clicked outside
-window.onclick = function(event) {
-    if (!event.target.matches('.profile-btn') && !event.target.closest('.profile-btn')) {
-        const dropdowns = document.getElementsByClassName('profile-dropdown-content');
-        for (let i = 0; i < dropdowns.length; i++) {
-            const openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}

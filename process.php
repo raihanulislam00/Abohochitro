@@ -27,10 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $display_zip = $_POST["zip"];
     $display_city = $_POST["city"];
     $display_terms = isset($_POST["terms"]) ? 1 : 0;
-$fav_color = $_POST["fav_color"] ?? '#3498db';
+    $fav_color = $_POST["fav_color"] ?? '#3498db';
 
     // Set the favorite color as a cookie that expires in 30 days
     setcookie('fav_color', $fav_color, time() + (30 * 24 * 60 * 60), '/');
+    
     // Escape values for database insertion
     $fname = $conn->real_escape_string($display_fname);
     $email = $conn->real_escape_string($display_email);
@@ -62,41 +63,35 @@ $fav_color = $_POST["fav_color"] ?? '#3498db';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Successful</title>
+    <title>Registration Successful | Air Quality & Health Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Modern styling for confirmation page */
-        :root {
-            --primary-color: #3498db;
-            --primary-dark: #2980b9;
-            --accent-color: #2ecc71;
-            --accent-dark: #27ae60;
-            --text-dark: #2c3e50;
-            --text-light: #ecf0f1;
-            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: var(--text-dark);
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            color: #fff;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f5f7fa, #e4e7ec);
+            padding: 20px;
         }
 
         .container {
-            background-color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            max-width: 700px;
-            width: 90%;
-            box-shadow: var(--card-shadow);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -106,71 +101,122 @@ $fav_color = $_POST["fav_color"] ?? '#3498db';
             position: absolute;
             top: 0;
             left: 0;
-            width: 6px;
+            width: 8px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            background: linear-gradient(to bottom, #3498db, #2ecc71);
         }
 
         .success-icon {
             display: flex;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
         }
 
         .success-circle {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            background-color: var(--accent-color);
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
-            font-size: 2.5rem;
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            font-size: 3.5rem;
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4);
         }
 
         h2 {
-            color: var(--primary-color);
             text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #fff;
             position: relative;
+            padding-bottom: 15px;
         }
 
         h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            border-radius: 3px;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            border-radius: 2px;
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .health-benefits {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .health-benefits h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: #f39c12;
+            font-size: 1.5rem;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .benefit-item i {
+            color: #2ecc71;
+            font-size: 1.2rem;
+            min-width: 24px;
+            margin-top: 3px;
         }
 
         .info-card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        h3 {
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 0.75rem;
+        .info-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            color: #3498db;
+            font-size: 1.5rem;
         }
 
         .info-row {
             display: flex;
-            margin-bottom: 0.75rem;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .info-row:last-child {
@@ -180,100 +226,115 @@ $fav_color = $_POST["fav_color"] ?? '#3498db';
         .label {
             flex: 1;
             font-weight: 600;
-            color: var(--text-dark);
             display: flex;
             align-items: center;
-        }
-
-        .label i {
-            margin-right: 10px;
-            color: var(--primary-color);
-            width: 20px;
-            text-align: center;
+            gap: 10px;
         }
 
         .value {
             flex: 2;
-            color: #555;
-        }
-
-        .button-container {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            justify-content: center;
-        }
-
-        .button {
-            display: inline-block;
-            text-align: center;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .back-button {
-            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
-            color: white;
-        }
-
-        .confirm-button {
-            background: linear-gradient(to right, var(--accent-color), var(--accent-dark));
-            color: white;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .back-button:hover, .confirm-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .terms-agreed {
             display: inline-block;
-            padding: 5px 12px;
-            border-radius: 30px;
-            font-size: 0.85rem;
+            padding: 6px 15px;
+            border-radius: 20px;
             font-weight: 500;
         }
 
         .terms-agreed.yes {
-            background-color: rgba(46, 204, 113, 0.15);
-            color: var(--accent-dark);
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
         }
 
         .terms-agreed.no {
-            background-color: rgba(231, 76, 60, 0.15);
-            color: #c0392b;
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+
+        .color-display {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .dashboard-button {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+
+        .dashboard-button:hover {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 2rem;
-                width: 95%;
+                padding: 25px;
             }
             
             .info-row {
                 flex-direction: column;
-                align-items: flex-start;
+                gap: 5px;
+                padding: 12px 0;
             }
             
             .label {
-                margin-bottom: 0.5rem;
+                margin-bottom: 5px;
             }
             
-            .value {
-                padding-left: 25px;
-            }
-
             .button-container {
                 flex-direction: column;
             }
-
+            
             .button {
                 width: 100%;
             }
@@ -290,13 +351,37 @@ $fav_color = $_POST["fav_color"] ?? '#3498db';
         
         <h2>Registration Successful!</h2>
         
-        <p class="text-center" style="text-align: center;">Thank you for registering with our Air Quality Monitoring service. Your account has been created successfully.</p>
+        <div class="welcome-message">
+            <p>Welcome to the Air Quality & Health Dashboard, <?php echo htmlspecialchars($display_fname); ?>!</p>
+            <p>Your account has been created successfully. You can now access personalized air quality information and health recommendations.</p>
+        </div>
+        
+        <div class="health-benefits">
+            <h3><i class="fas fa-heartbeat"></i> Your Health Benefits</h3>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <i class="fas fa-bell"></i>
+                    <div>Personalized air quality alerts for your location</div>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-lungs"></i>
+                    <div>Health recommendations based on current AQI levels</div>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-mask"></i>
+                    <div>Protection guidelines during high pollution periods</div>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <div>Air quality information for your preferred city: <?php echo htmlspecialchars($display_city); ?></div>
+                </div>
+            </div>
+        </div>
         
         <div class="info-card">
-            <h3><i class="fas fa-user-check"></i> Your Information</h3>
-
+            <h3><i class="fas fa-user-circle"></i> Account Information</h3>
+            
             <?php
-            // Only display info if POST data exists
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<div class='info-row'>";
                 echo "<div class='label'><i class='fas fa-user'></i> Full Name</div>";
@@ -324,43 +409,34 @@ $fav_color = $_POST["fav_color"] ?? '#3498db';
                 echo "</div>";
 
                 echo "<div class='info-row'>";
-                echo "<div class='label'><i class='fas fa-check-circle'></i> Terms & Conditions</div>";
-                
-                if ($display_terms == 1) {
-                    echo "<div class='value'><span class='terms-agreed yes'><i class='fas fa-check'></i> Agreed</span></div>";
-                } else {
-                    echo "<div class='value'><span class='terms-agreed no'><i class='fas fa-times'></i> Not Agreed</span></div>";
-                }
-                
+                echo "<div class='label'><i class='fas fa-palette'></i> Dashboard Color</div>";
+                echo "<div class='value'>";
+                echo "<div class='color-display'>";
+                echo "<div class='color-preview' style='background-color: $fav_color;'></div>";
+                echo "<span>" . htmlspecialchars($fav_color) . "</span>";
+                echo "</div>";
+                echo "</div>";
                 echo "</div>";
 
+                echo "<div class='info-row'>";
+                echo "<div class='label'><i class='fas fa-file-contract'></i> Terms & Conditions</div>";
+                if ($display_terms == 1) {
+                    echo "<div class='value'><span class='terms-agreed yes'>Agreed</span></div>";
+                } else {
+                    echo "<div class='value'><span class='terms-agreed no'>Not Agreed</span></div>";
+                }
+                echo "</div>";
             } else {
                 echo "<p>No data received. Please fill out the registration form.</p>";
             }
             ?>
         </div>
-        <div class='info-row'>
-        <div class='label'><i class='fas fa-palette'></i> Background Color</div>
-        <div class='value'>
-            <span style='display: inline-block; width: 20px; height: 20px; background-color: <?php echo $fav_color; ?>; border-radius: 50%; margin-right: 10px;'></span>
-            <?php echo $fav_color; ?>
-        </div>
-        </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <p>You will receive air quality alerts for your preferred city.</p>
-            <p>Monitor air quality conditions and get health recommendations tailored to your location.</p>
-        </div>
         
         <div class="button-container">
-            <a href="index.php" class="button back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
-            <button type="button" class="button confirm-button" onclick="confirmRegistration()"><i class="fas fa-check-circle"></i> Confirm</button>
+            <a href="request.php" class="button dashboard-button">
+                <i class="fas fa-tachometer-alt"></i> Go to Login Page
+            </a>
         </div>
     </div>
-
-    <script>
-    function confirmRegistration() {
-        window.location.href = "confirm.php";
-    }
-    </script>
 </body>
 </html>
