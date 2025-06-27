@@ -45,7 +45,7 @@ A comprehensive web-based dashboard for monitoring air quality, temperature, and
 - **Cross-Platform**: Compatible across all major browsers and operating systems
 - **Accessibility**: Built with accessibility standards in mind
 
-## 🎥 Demo & Screenshots
+## 🎥 Demo
 
 ### 📹 Video Demonstration
 **Watch the full demo of our Air Quality Dashboard in action:**
@@ -55,13 +55,6 @@ A comprehensive web-based dashboard for monitoring air quality, temperature, and
 🔗 **[Watch on YouTube: Air Quality Dashboard Demo](https://youtu.be/LfcAvnbAchM)**
 
 *This comprehensive video walkthrough showcases all the key features including user registration, air quality monitoring, temperature tracking, cyclone monitoring, and profile management.*
-
-### 📸 Key Interface Screenshots
-- **Main Dashboard**: Real-time environmental data overview
-- **Air Quality Monitor**: Detailed AQI tracking and health recommendations
-- **Temperature Analytics**: Comprehensive temperature data visualization
-- **Cyclone Tracker**: Interactive storm monitoring and prediction maps
-- **User Profile**: Personalized settings and preferences management
 
 ## 🚀 Installation
 
