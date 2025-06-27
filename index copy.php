@@ -678,7 +678,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 <body>
     <div class="main-container">
         <header>
-            <h1><i class="fas fa-wind"></i> Abohochitro(আবহচিত্র)</h1>
+            <h1><i class="fas fa-wind"></i> Air Quality & Health Dashboard</h1>
             <p>Comprehensive health guidance for air quality conditions in Bangladesh</p>
         </header>
 
@@ -688,7 +688,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                     <div class="health-tips-section">
                         <div class="health-tips-header">
                             <i class="fas fa-heartbeat fa-2x"></i>
-                            <h2>Weather Widget</h2>
+                            <h2>Air Quality & Health Dashboard</h2>
                         </div>
                         
                         <!-- Real-time Air Quality Widget -->
